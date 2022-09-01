@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+    <title>Speaker Recognition Tool</title>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/style_refact.css">
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+
+</head>
+<body>
+
+<div class="container register">
+    <div class="row">
+        <div class="col-md-3 register-left">
+            <img src="../static/voice-recognition.png" alt=""/>
+
+            <h3>Speaker Recognition</h3>
+
+        </div>
+        <div class="col-md-9 register-right">
+
+            <div class="row justify-content-md-center" style="align-items: center;justify-content: center;">
+
+                <label><br>Scegli cosa fare:&nbsp;&nbsp;</label>
+                <ul class="nav nav-tabs nav-justified" id="action" role="tablist">
+                    <li class="nav-item" value="login">
+                        <a class="nav-link active" id="login" value="login" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true">Riconosci</a>
+                    </li>
+                    <li class="nav-item" value ="register">
+                        <a class="nav-link" id="register" value ="register" data-toggle="tab"  role="tab" aria-controls="profile" aria-selected="false">Registra</a>
+                    </li>
+                </ul>
+
+
+            </div>
+
+
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="riconosci" role="tabpanel" aria-labelledby="home-tab">
+                    <h3 class="register-heading" id="action-label">Inserisci il nome associato alla voce che vuoi riconoscere</h3>
+                    <div class="row register-form">
+                        <div class="col-md-6">
+
+                            <h4>Inserisci un nome</h4><br>
+
+                            <div id='form'>
+
+                                <form id="newform" action="#" class="needs-validation" novalidate>
+
+                                    <div class="form-group p-1">
+
+                                        <input type="text" class="form-control is-invalid" id="username" onkeyup="controlla()"
+                                               placeholder="Usa ESCLUSIVAMENTE il tuo username" required/>
+                                        <div id="email-validation" class="invalid-feedback">Username non valido</div>
+                                    </div>
+
+                                </form>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="container" id="recDiv">
+                                    <button id="recordButton">
+                                        <div class="" id="recEffectDiv"></div>
+                                        <i class="fa fa-microphone" aria-hidden="true"></i>
+                                    </button>
+
+
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div id="newTimer"></div>
+                            </div>
+
+
+
+                            <!--
+                            <div id="controls">
+                                <button id="recordButton"><i class="fa fa-stop-circle-o"></i>Rec</button>
+                                <button id="stopButton" disabled><i class="fa fa-pause-circle-o"></i>Stop</button>
+                            </div>
+                            -->
+                            <p id="format">
+
+                                <!--
+                                <div class="row">
+                                <div id="timer" style="text-align:auto">Timer</div>
+                                <img src="stop-watch-3.gif" style="width: 160px;height: 150px;">
+                            </div>
+                            -->
+
+
+
+
+                        </div>
+                        <div class="col-md-6">
+
+                            <h4>Leggi qui</h4><br>
+                            <div id="readingText"
+                                 style="background-color: #e0e0eb;padding:3px;height:14em;width:98%;border:1px solid #000;border-radius: 15px;font:16px/26px BlinkMacSystemFont,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;overflow:auto;">
+                            </div>
+
+                            <a class="btn btn-primary btn-sm" onclick="loadWikiArticle()" style="color: white;">Cambia testo</a>
+
+                            <br><h4>Registrazioni</h4><br>
+                            <ol id="recordingsList"></ol>
+
+
+
+                            <div hidden=true class="loader" id="load-gif">
+                                <div class="bar1"></div>
+                                <div class="bar2"></div>
+                                <div class="bar3"></div>
+                                <div class="bar4"></div>
+                                <div class="bar5"></div>
+                                <div class="bar6"></div>
+                            </div>
+                            <p>
+                            <h2 id="result"></h2>
+                            </p>
+
+                            <button type="button" class="btnRegister" id="submitButton" value="Submit"/>Invia</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
+<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+<script src="../static/js/app_refact.js"></script>
+<script type="text/javascript">
+    loadWikiArticle()
+</script>
+
+</body>
+</html>
+
+
+
